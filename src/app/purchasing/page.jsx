@@ -3,7 +3,7 @@ import { Button, Card, FormControl, Paper, TextField } from "@mui/material";
 import { useState } from "react";
 
 export default function page() {
-    const [inputFields, setInputFields] = useState([{part:''},{part:''},{part:''},{part:''},{part:''},])
+    const [inputFields, setInputFields] = useState([{part:'',quantity:'', description:'',vendor:'',cost:''},{part:''},{part:''},{part:''},{part:''},])
     const poNumber = 1;
 
     const addFields = () => {
@@ -22,6 +22,26 @@ export default function page() {
                                 name="part"
                                 variant="outlined"
                                 placeholder="Part Number"
+                            />
+                            <TextField
+                                name="quantity"
+                                variant="outlined"
+                                placeholder="Qty"
+                            />
+                            <TextField
+                                name="description"
+                                variant="outlined"
+                                placeholder="Description"
+                            />
+                            <TextField
+                                name="vendor"
+                                variant="outlined"
+                                placeholder="Vendor"
+                            />
+                            <TextField
+                                name="cost"
+                                variant="outlined"
+                                placeholder="Cost"
                             />
                         </div>
                     )
