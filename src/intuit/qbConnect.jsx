@@ -1,11 +1,7 @@
-import OAuthClient from 'intuit-oauth'
-import { SecretManagerServiceClient } from '@google-cloud/secret-manager'
+import {OAuthClient} from 'intuit-oauth'
+
 
 export default async function qbConnect() {
-    const secretClient = new SecretManagerServiceClient();
-    const [accessResponse] = await secretClient.accessSecretVersion({
-        name: ''
-    })
     var oauthClient = new OAuthClient({
         clientId: '',
         clientSecret: '',
