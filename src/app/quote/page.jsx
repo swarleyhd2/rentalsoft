@@ -1,5 +1,5 @@
 'use client'
-import { Button, Container, Divider, FormControl, FormGroup, FormLabel, Paper, Select, TextField, MenuItem, InputLabel } from '@mui/material'
+import { Button, Container, Divider, FormControl, FormGroup, FormLabel, Paper, Select, TextField, MenuItem, InputLabel, Grid, InputBase, Input, OutlinedInput, FormControlLabel, Checkbox } from '@mui/material'
 import React from 'react'
 
 const equipmentTypes = [
@@ -12,53 +12,102 @@ const equipmentTypes = [
         label: "26' Scissor Lift"
     }
 ]
+const handleCustomerChange = () => {
+
+}
+const handleShippingChange = () => {
+
+}
+const handleContactChange = () => {
+
+}
 export default function page() {
   return (
     <>
-        <Container>
-            <h1>Create Quote</h1>
-            <Paper>
-            <FormControl margin="normal">
-                <FormGroup>
-                   <InputLabel id='customer-select-label' size='small'>Customer Name</InputLabel>
-                    <Select size='small' margin='dense' labelId='customer-select-label' label='Customer Name' variant='outlined'>
-                        <MenuItem value={10}>Ten</MenuItem>
-                        <MenuItem value={20}>Twenty</MenuItem>
-                        <MenuItem value={30}>Thirty</MenuItem>
-                    </Select>
-                    <TextField size='small' margin='dense' label='Customer Email'></TextField>
-                    <TextField size='small' margin='normal' label='Site Name'></TextField>
-                </FormGroup>
-                <FormGroup>
-                    <h3>Equipment</h3>
-                    <TextField
-                        select
-                        label="Equipment Type"
-                        size='small'
+        <Container maxWidth='md'>
+            
+            
+
+                <h1>Create Quote</h1>
+                <Grid xs={12}>
+                    <FormControl fullWidth>
+                        <InputLabel id="customer">Customer</InputLabel>
+                        <Select
+                            labelId='customer'
+                            id='customer-select'
+                            label='Customer'
+                            onChange={handleCustomerChange}
+                            fullWidth
+                        >
+                            <MenuItem Value={10}>Customers go here</MenuItem>
+                            <MenuItem Value={1}>+ Add Customer</MenuItem>
+                        </Select>
+                    </FormControl>
+                </Grid>
+                <Grid>
+                <InputLabel id="shipping">Shipping Info</InputLabel>
+                    <Select
+                        labelId='shipping'
+                        id='shipping-select'
+                        label='Shipping Info'
+                        onChange={handleShippingChange}
+                        fullWidth
                     >
-                        {equipmentTypes.map((option) => (
-                            <MenuItem key={option.value} value={option.value}>
-                                {option.label}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                </FormGroup>
-                <FormGroup>
-                    <h3>Rates</h3>
-
-                    <TextField size='small' margin='normal' label='Day'></TextField>
-
-                    <TextField size='small' margin='normal' label='Week'></TextField>
-
-                    <TextField size='small' margin='normal' label='4 Week'></TextField>
-
-                    <TextField size='small' margin='normal' label='Trucking (one way)'></TextField>
-                </FormGroup>
-                <Button variant="contained" fullWidth>Submit</Button>
-
-            </FormControl>
-
-            </Paper>
+                        <MenuItem Value={10}>address go here</MenuItem>
+                        <MenuItem Value={1}>+ Add Address</MenuItem>
+                    </Select>
+                </Grid>
+                <Grid>
+                    <InputLabel id="contact">Contact</InputLabel>
+                        <Select
+                            labelId='contact'
+                            id='contact-select'
+                            label='Contact'
+                            onChange={handleContactChange}
+                            fullWidth
+                        >
+                            <MenuItem Value={10}>contacts go here</MenuItem>
+                            <MenuItem Value={1}>+ Add Contact</MenuItem>
+                        </Select>
+                </Grid>
+                <Grid>
+                    <OutlinedInput id='start-date' type='date'/>
+                    <OutlinedInput id='end-date' type='date'/>
+                </Grid>
+                <Grid>
+                    <InputLabel id="equipment">Equipment Type</InputLabel>
+                    <Select
+                        labelId='equipment'
+                        id='equipment-select'
+                        label='Equipment Type'
+                        fullWidth
+                    >
+                        <MenuItem Value={10}>Equipment goes here</MenuItem>
+                    </Select>
+                </Grid>
+                <Grid>
+                    <OutlinedInput id='day-rate' type='text' placeholder='Day'/>
+                    <OutlinedInput id='week-rate' type='text' placeholder='Week'/>
+                    <OutlinedInput id='4-week-rate' type='text' placeholder='4 Week'/>
+                </Grid>
+                <Grid>
+                    <Button type='button'>Add Another Unit</Button>
+                </Grid>
+                <Grid>
+                    <OutlinedInput id='trucking-delivery' type='text' placeholder='Delivery'/>
+                    <OutlinedInput id='trucking-return' type='text' placeholder='Return'/>
+                </Grid>
+                <Grid>
+                    <OutlinedInput id='environmental' type='text' placeholder='Environmental Fee'/>
+                    <OutlinedInput id='fuel' type='text' placeholder='Fuel'/>
+                    <OutlinedInput id='other' type='text' placeholder='Other'/>
+                    <FormControlLabel control={<Checkbox/>} label='Damage Waiver 15%'/>
+                    <FormControlLabel control={<Checkbox/>} label='Tax Exempt'/>
+                </Grid>
+                <Grid>
+                    <Button type='submit' variant='contained'>Send</Button>
+                </Grid>
+            
     </Container>
     </>
   )
