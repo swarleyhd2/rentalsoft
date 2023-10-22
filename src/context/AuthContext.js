@@ -1,6 +1,7 @@
 import React from 'react';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import firebase_app from '@/firebase/config';
+import { Box, CircularProgress } from '@mui/material';
 
 const auth = getAuth(firebase_app);
 
@@ -29,7 +30,7 @@ export const AuthContextProvider = ({
 
     return (
         <AuthContext.Provider value={{ user }}>
-            {loading ? <div>Loading...</div> : children}
+            {loading ? <Box display='flex' justifyContent='center' alignItems='center' minHeight='100vh' ><CircularProgress size={80}/></Box> : children}
         </AuthContext.Provider>
     );
 };
