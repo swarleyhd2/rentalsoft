@@ -1,19 +1,24 @@
 import React, { useState } from 'react'
-import { Box, Modal } from '@mui/material'
+import { Box, Modal, Paper, Container, Grid } from '@mui/material'
+import { CreateCustomer } from './ServerForm'
 
-export default function Modal() {
-    const [open, setOpen ] = useState(false)
-    const handleOpen = () => setOpen(true)
-    const handleClose = () => setOpen(false)
-
+export default function NewCustomerModal(props={open, handleClose}) {
+    
   return (
     <Modal
-        open={open}
-        onClose={handleClose}
+        open={props.open}
+        onClose={props.handleClose}
     >
-        <Box>
-            
-        </Box>
+      <Container maxWidth='md'>
+        <Grid rowSpacing={3}>
+          <Paper justifyContent='center' alignItems='center' >
+          <Box justifyContent='center' alignItems='center' minHeight='80vh' sx={{marginTop:'10%'}}>
+            <button onClick={props.handleClose}>Close</button>
+            <h2>test</h2>
+            </Box>
+            </Paper>
+        </Grid>
+      </Container>
     </Modal>
   )
 }

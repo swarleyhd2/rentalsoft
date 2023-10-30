@@ -3,7 +3,8 @@ import { Option, Button, Container, Divider, FormControl, FormGroup, FormLabel, 
 import React, { useState } from 'react'
 import { getAuth } from 'firebase/auth'
 import { useFormStatus } from 'react-dom'
-import { CreateQuote } from '../components/ServerForm'
+import { CreateQuote } from '../../components/ServerForm'
+import NewAddressModal from '../../components/NewAddressModal'
 
 const equipmentTypes =[
     {
@@ -31,21 +32,30 @@ export default function page() {
     const [ shipping, setShipping ] = useState('')
     const [ contact, setContact ] = useState('')
     const [ equipment, setEquipment ] = useState('')
-    const [ dayRate, setDayRate ] = useState(0)
-    const [ weekRate, setWeekRate ] = useState(0)
-    const [ fourWeekRate, setFourWeekRate ] = useState(0)
+    const [ lastDayRate, setLastDayRate ] = useState('')
+    const [ lastWeekRate, setLastWeekRate ] = useState('')
+    const [ lastFourWeekRate, setLastFourWeekRate ] = useState('')
     const [ unitCount, setUnitCount ] = useState(1)
+
+    const [ addressModalOpen, setAddressModalOpen ] = useState(false)
+
     const auth = getAuth()
     const user = auth.currentUser.email
     const createQuoteFormWithUser = CreateQuote.bind(null, user)
+
+    const closeAddressModal = () => {
+        setAddressModalOpen(false)
+    }
     const handleCustomerChange = (event) => {
         setCustomer(event.target.value)
     }
     const handleShippingChange = (event) => {
-    
+        if (event.target.value == 0) {
+            setAddressModalOpen(true)
+        }
     }
     const handleContactChange = (event) => {
-        
+
     }
     const handleEquipmentChange = (event) => {
 
@@ -55,8 +65,9 @@ export default function page() {
     <>
         {user}
         <Container maxWidth='md'>
+            <NewAddressModal customerID={1} open={addressModalOpen} handleClose={closeAddressModal}/>
             <form action={createQuoteFormWithUser}>
-            <h1>Create Quote</h1>
+            <h1>New Order</h1>
             <Grid>
                 <FormControl fullWidth>
                     <InputLabel id="customer">Customer</InputLabel>
@@ -69,7 +80,7 @@ export default function page() {
                         fullWidth
                     >
                         <MenuItem value={10}>Customers go here</MenuItem>
-                        <MenuItem value={1}>+ Add Customer</MenuItem>
+                        <MenuItem value={0}>+ Add Customer</MenuItem>
                     </Select>
                 </FormControl>
             </Grid>
@@ -84,7 +95,7 @@ export default function page() {
                     fullWidth
                 >
                     <MenuItem value={10}>address go here</MenuItem>
-                    <MenuItem value={1}>+ Add Address</MenuItem>
+                    <MenuItem value={0}>+ Add Address</MenuItem>
                 </Select>
             </Grid>
             <Grid>
@@ -115,7 +126,7 @@ export default function page() {
                     fullWidth
                 >
                         {equipmentTypes.map((option,index)=>
-                            <MenuItem value={option.value}>{option.label}</MenuItem>
+                            <MenuItem key={index} value={option.value}>{option.label}</MenuItem>
                         )}
                 </Select>
             </Grid>
