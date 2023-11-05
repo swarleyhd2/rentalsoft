@@ -2,10 +2,10 @@
 import { Option, Button, Container, Divider, FormControl, FormGroup, FormLabel, Paper, Select, TextField, MenuItem, InputLabel, Grid, InputBase, Input, OutlinedInput, FormControlLabel, Checkbox } from '@mui/material'
 import React, { useState } from 'react'
 import { getAuth } from 'firebase/auth'
-import { useFormStatus } from 'react-dom'
 import { CreateQuote } from '../../components/ServerForm'
 import NewAddressModal from '../../components/NewAddressModal'
-
+import { getCustomerList, getShippingList } from '@/firebase/getData'
+import { useEffect } from 'react'
 const equipmentTypes =[
     {
         value: '19scissor',
@@ -36,18 +36,26 @@ export default function page() {
     const [ lastWeekRate, setLastWeekRate ] = useState('')
     const [ lastFourWeekRate, setLastFourWeekRate ] = useState('')
     const [ unitCount, setUnitCount ] = useState(1)
-
+    const [ customerMenuItems, setCustomerMenuItems ] = useState([])
+    const [ shippingMenuItems, setShippingMenuItems ] = useState([])
+    const [ contactMenuItems, setContactMenuItems ] = useState([])
     const [ addressModalOpen, setAddressModalOpen ] = useState(false)
 
     const auth = getAuth()
     const user = auth.currentUser.email
     const createQuoteFormWithUser = CreateQuote.bind(null, user)
-
     const closeAddressModal = () => {
         setAddressModalOpen(false)
     }
     const handleCustomerChange = (event) => {
-        setCustomer(event.target.value)
+        setCustomer(event.target.value);
+        getShippingList(event.target.value).then((res) => {
+            const snapshot = res.result;
+
+            if (snapshot.docs.length > 0) {
+                setShippingMenuItems(snapshot.docs.map(doc => <MenuItem  key={doc.id} value={doc.id}>{doc.data().name}</MenuItem>))
+            } else {console.log('no docs here')}
+        });
     }
     const handleShippingChange = (event) => {
         if (event.target.value == 0) {
@@ -60,8 +68,16 @@ export default function page() {
     const handleEquipmentChange = (event) => {
 
     }
-
-  return (
+    useEffect(() => {
+        getCustomerList().then((res) => {
+            if (res.error == null){
+                const snapshot = res.result;
+                setCustomerMenuItems(snapshot.docs.map(doc => <MenuItem  key={doc.id} value={doc.id}>{doc.data().name}</MenuItem>))    
+            }
+        })
+    }, [])
+    
+  return  (
     <>
         {user}
         <Container maxWidth='md'>
@@ -75,12 +91,13 @@ export default function page() {
                         labelId='customer'
                         id='customer-select'
                         label='Customer'
-                        value={customer}
+                        value= {customer}
                         onChange={handleCustomerChange}
                         fullWidth
                     >
-                        <MenuItem value={10}>Customers go here</MenuItem>
                         <MenuItem value={0}>+ Add Customer</MenuItem>
+                        {customerMenuItems}
+                        
                     </Select>
                 </FormControl>
             </Grid>
