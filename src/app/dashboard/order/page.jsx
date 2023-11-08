@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { getAuth } from 'firebase/auth'
 import { CreateQuote } from '../../components/ServerForm'
 import NewAddressModal from '../../components/NewAddressModal'
-import { getCustomerList, getShippingList } from '@/firebase/getData'
+import { getCustomerList, getShippingList, getCustomerList } from '@/firebase/getData'
 import { useEffect } from 'react'
 const equipmentTypes =[
     {
@@ -51,10 +51,15 @@ export default function page() {
         setCustomer(event.target.value);
         getShippingList(event.target.value).then((res) => {
             const snapshot = res.result;
-
             if (snapshot.docs.length > 0) {
                 setShippingMenuItems(snapshot.docs.map(doc => <MenuItem  key={doc.id} value={doc.id}>{doc.data().name}</MenuItem>))
             } else {console.log('no docs here')}
+        });
+        getContactList(event.target.value).then((res) => {
+            const snapshot = res.result;
+            if (snapshot.docs.length > 0) {
+                setContactMenuItems(snapshot.docs.map(docs => <MenuItem  key={doc.id} value={doc.id}>{doc.data().name}</MenuItem>))
+            }
         });
     }
     const handleShippingChange = (event) => {

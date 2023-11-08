@@ -40,3 +40,16 @@ export async function getShippingList(customer) {
 
     return {result, error}
 }
+
+export async function getContactList(customer) {
+    let result = null
+    let error = null
+    let queryString = `customerList/${customer}/contacts`;
+    try {
+        result = await getDocs(collection(db, queryString))
+    } catch (e) {
+        error = e;
+    }
+
+    return {result, error}
+}
