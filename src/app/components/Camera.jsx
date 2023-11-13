@@ -2,7 +2,7 @@
 import { Button } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
 
-export default function page() {
+export default function Camera() {
     const videoRef = useRef(null)
     const photoRef = useRef(null)
     const [hasPhoto, setHasPhoto] = useState(false)

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Modal, Paper, Container, Grid, Button } from '@mui/material'
-import { CreateAddress } from './ServerForm'
+import { CreateAddress } from './ServerForms'
 
 export default function NewAddressModal(props={customerID, open, handleClose}) {
     const CreateAddressWithCustomerID = CreateAddress.bind(null, props.customerID)
@@ -16,11 +16,11 @@ export default function NewAddressModal(props={customerID, open, handleClose}) {
             <button onClick={props.handleClose}>Close</button>
             <h2>test</h2>
             <form action={CreateAddressWithCustomerID}>
-              <input type='text' id='name' placeholder='Job Name'/>
-              <input type='text' id='address' placeholder='Address'/>
-              <input type='text' id='address2' placeholder='Address Line 2'/>
-              <input type='text' id='city' placeholder='City'/>
-              <input type='text' id='state' placeholder='State'/>
+              <input type='text' id='name' name='jobname' placeholder='Job Name'/>
+              <input type='text' id='address' name='address' placeholder='Address'/>
+              <input type='text' id='address2' name='address2' placeholder='Address Line 2'/>
+              <input type='text' id='city' name='city' placeholder='City'/>
+              <input type='text' id='state' name='state' placeholder='State'/>
               <Button type='submit'>Save</Button>
             </form>
             </Box>

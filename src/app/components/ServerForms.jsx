@@ -4,8 +4,12 @@ import { getFirestore, doc, setDoc } from "firebase/firestore";
 import firebase_app from '@/firebase/config.js';
 
 export async function CreateQuote(user, formData) {
-    const fs = getFirestore(firebase_app)
-
+    const db = getFirestore(firebase_app)
+    try {
+        console.log(formData.get('startDate'))
+    }catch (e) {
+        console.log(e)
+    }
     console.log(user)
 
 }

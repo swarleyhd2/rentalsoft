@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Modal, Paper, Container, Grid } from '@mui/material'
-import { CreateCustomer } from './ServerForm'
+import { CreateCustomer } from './ServerForms'
 
 export default function NewCustomerModal(props={open, handleClose}) {
     

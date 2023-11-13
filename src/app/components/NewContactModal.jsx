@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Box, Modal, Paper, Container, Grid } from '@mui/material'
-import { CreateContact } from './ServerForm'
+import { CreateContact } from './ServerForms'
 
 export default function NewContact(props={customerID, open, handleClose}) {
     const CreateContactWithCustomerID = CreateContact.bind(null, props.customerID)
