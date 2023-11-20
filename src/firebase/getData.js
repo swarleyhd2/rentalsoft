@@ -1,5 +1,5 @@
 import firebase_app from "./config";
-import { getFirestore, doc, getDoc, collection, getDocs} from "firebase/firestore";
+import { getFirestore, doc, getDoc, collection, getDocs, orderBy, query} from "firebase/firestore";
 
 const db = getFirestore(firebase_app)
 export default async function getDocument(collection, id) {
@@ -15,12 +15,25 @@ export default async function getDocument(collection, id) {
 
     return {result, error}
 }
+export async function getCustomer(customerID) {
+    let result = null
+    let error = null
+    try {
+        const docRef = doc(db, 'customerList', customerID)
+        result = await getDoc(docRef)
+    } catch (e) {
+        error = e
+    }
+
+    return {result, error}
+}
 
 export async function getCustomerList() {
     let result = null
     let error = null
     try {
-        result = await getDocs(collection(db, 'customerList'))
+        const q = query(collection(db, 'customerList'), orderBy("name"))
+        result = await getDocs(q)
     } catch (e) {
         error = e;
     }

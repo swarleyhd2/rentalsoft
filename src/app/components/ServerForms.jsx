@@ -25,3 +25,15 @@ export async function CreateContact(customerID, formData) {
 export async function CreateCustomer(user, formData) {
 
 }
+
+export async function CreateOrder() {
+
+}
+
+export async function CreateMove() {
+
+}
+
+export async function CreateServiceRequest() {
+    
+}
