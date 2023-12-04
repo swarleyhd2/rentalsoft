@@ -1,9 +1,11 @@
 'use client'
 import { AuthContextProvider } from '@/context/AuthContext'
 import '../globals.css'
-import { AppBar, Box, Drawer, IconButton, Toolbar } from '@mui/material'
+import { AppBar, Box, Drawer, IconButton, List, ListItem, ListItemButton, ListItemIcon, ListItemText, Toolbar } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu';
 import { useState } from 'react';
+import Link from 'next/link';
+import { AddRoad, Agriculture, Build, Business, Close, Payments, Settings } from '@mui/icons-material';
 
 // export const metadata = {
 //   title: 'Create Next App',
@@ -11,11 +13,9 @@ import { useState } from 'react';
 // }
 
 export default function RootLayout({ children }) {
-    const [ openDrawer, setOpenDrawer ] = useState(true)
-    const toggleDrawer = (anchor, open) => (event) => {
-        if (event.type == 'keydown' && (event.key === 'Tab' || event.key == 'Shift')) {
-            return;
-        }
+    const [ openDrawer, setOpenDrawer ] = useState(false)
+    const toggleDrawer = () => {
+        setOpenDrawer(!openDrawer);
     }
   return (
 
@@ -25,11 +25,77 @@ export default function RootLayout({ children }) {
                 open={openDrawer}
                 onClose={toggleDrawer}
             >
-                this is a test
+                <List>
+                    <ListItem style={{display:'flex'}}>
+                        <ListItemIcon onClick={toggleDrawer} style={{width:'100%',display:'flex',justifyContent:'flex-end'}}>
+                            <Close/>
+                        </ListItemIcon>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton>
+                            <Link href='/dashboard/dispatch' onClick={toggleDrawer} style={{display:'flex', justifyContent:'flex-start'}}>
+                                <ListItemIcon>
+                                    <AddRoad/>
+                                </ListItemIcon>
+                                <ListItemText primary="Dispatch"/>
+                            </Link>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton>
+                            <Link href='/dashboard/customerselect' onClick={toggleDrawer} style={{display:'flex', justifyContent:'flex-start'}}>
+                                <ListItemIcon>
+                                    <Business/>
+                                </ListItemIcon>
+                                <ListItemText primary="Customer Select"/>
+                            </Link>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton>
+                            <Link href='/dashboard/inventory' onClick={toggleDrawer} style={{display:'flex', justifyContent:'flex-start'}}>
+                                <ListItemIcon>
+                                    <Agriculture/>
+                                </ListItemIcon>
+                                <ListItemText primary="Inventory"/>
+                            </Link>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton>
+                            <Link href='/dashboard/repairs' onClick={toggleDrawer} style={{display:'flex', justifyContent:'flex-start'}}>
+                                <ListItemIcon>
+                                    <Build/>
+                                </ListItemIcon>
+                                <ListItemText primary="Repairs"/>
+                            </Link>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton>
+                            <Link href='/dashboard/invoicing' onClick={toggleDrawer} style={{display:'flex', justifyContent:'flex-start'}}>
+                                <ListItemIcon>
+                                    <Payments/>
+                                </ListItemIcon>
+                                <ListItemText primary="Invoicing"/>
+                            </Link>
+                        </ListItemButton>
+                    </ListItem>
+                    <ListItem>
+                        <ListItemButton>
+                            <Link href='/dashboard/settings' onClick={toggleDrawer} style={{display:'flex', justifyContent:'flex-start'}}>
+                                <ListItemIcon>
+                                    <Settings/>
+                                </ListItemIcon>
+                                <ListItemText primary="Settings"/>
+                            </Link>
+                        </ListItemButton>
+                    </ListItem>
+                </List>
             </Drawer>
             <AppBar position='relative'>
                 <Toolbar>
-                    <IconButton>
+                    <IconButton onClick={toggleDrawer}>
                         <MenuIcon sx={{color:'#fff'}}/>
                     </IconButton>
                 </Toolbar>

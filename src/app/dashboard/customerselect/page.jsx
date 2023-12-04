@@ -1,12 +1,14 @@
 'use client'
 import { useEffect, useState } from "react";
 import { getCustomerList } from "@/firebase/getData";
-import { Card, Grid, List, ListItem, ListItemButton, ListItemText } from "@mui/material";
+import { Card, FormControl, Grid, InputAdornment, InputLabel, List, ListItem, ListItemButton, ListItemText, OutlinedInput } from "@mui/material";
+import SearchIcon from '@mui/icons-material/Search';
 import Link from "next/link";
 
 export default function page() {
     const [ customerListItems, setCustomerListItems ] = useState()
     const [ newCustomerItem, setNewCustomerItem ] = useState()
+    const [query, setQuery] = useState()
     useEffect(() => {
         getCustomerList().then((res) => {
             if (res.error == null){
@@ -21,9 +23,16 @@ export default function page() {
 
     return(
         <>
-            <Grid container justifyContent='center'>
+            <Grid container justifyContent='center' paddingTop='20px'>
                 <Grid item xs={12} md={6} lg={4} sx={{'justifyContent':'center'}}>
-                    <Card>         
+                    <Card>  
+                        <FormControl fullWidth>
+                            <OutlinedInput
+                                id="search"
+                                startAdornment={<InputAdornment position="start"><SearchIcon/></InputAdornment>}
+                                sx={{marginTop:'20px'}}
+                            />
+                        </FormControl>     
                         <List>
                             {newCustomerItem}
                             {customerListItems}
