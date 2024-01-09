@@ -22,3 +22,13 @@ export async function emailSignIn(email, password) {
 
     return { result, error };
 }
+
+export async function signOut() {
+    const auth = getAuth(firebase_app);
+    await auth.signOut();
+}
+
+export async function getCurrentUser() {
+    const auth = getAuth(firebase_app);
+    return auth.currentUser;
+}   
