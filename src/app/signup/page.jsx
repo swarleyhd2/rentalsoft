@@ -14,7 +14,7 @@ export default function page() {
     if (error) {
       return console.log(error)
     }
-
+    console.log(result)
     return router.push("/dashboard")
   }
   

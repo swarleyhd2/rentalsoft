@@ -1,5 +1,5 @@
 'use client'
-import googleSignIn, { emailSignIn } from "@/firebase/auth/signin"
+import { emailSignIn } from "@/firebase/auth/signin"
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 export default function page() {
