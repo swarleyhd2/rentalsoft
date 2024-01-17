@@ -1,6 +1,8 @@
 import firebase_app from "../config";
 import {getAuth, getRedirectResult, GoogleAuthProvider, signInWithRedirect, signInWithEmailAndPassword} from "firebase/auth";
 
+const auth = getAuth(firebase_app)
+
 export default async function googleSignIn() {
     const provider = new GoogleAuthProvider();
     const auth = getAuth(firebase_app);
@@ -13,7 +15,7 @@ export default async function googleSignIn() {
 
 export async function emailSignIn(email, password) {
     let result = null;
-        error = null;
+    let error = null;
     try {
         result = await signInWithEmailAndPassword(auth, email, password);
     } catch (e) {
@@ -24,11 +26,9 @@ export async function emailSignIn(email, password) {
 }
 
 export async function signOut() {
-    const auth = getAuth(firebase_app);
     await auth.signOut();
 }
 
 export async function getCurrentUser() {
-    const auth = getAuth(firebase_app);
     return auth.currentUser;
 }   

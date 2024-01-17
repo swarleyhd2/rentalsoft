@@ -2,6 +2,7 @@ import React from 'react';
 import { onAuthStateChanged, getAuth } from 'firebase/auth';
 import firebase_app from '@/firebase/config';
 import { Box, CircularProgress } from '@mui/material';
+import { useRouter } from 'next/navigation';
 
 const auth = getAuth(firebase_app);
 
@@ -14,15 +15,18 @@ export const AuthContextProvider = ({
 }) => {
     const [user, setUser] = React.useState(null);
     const [loading, setLoading] = React.useState(true);
-
+    const router = useRouter()
+    
     React.useEffect(() => {
-        const unsubscribe = onAuthStateChanged(auth, (user) => {
+        const unsubscribe = onAuthStateChanged(auth, async (user) => {
             if (user) {
                 setUser(user);
             } else {
                 setUser(null);
+                router.push('/signin')
             }
             setLoading(false);
+  
         });
 
         return () => unsubscribe();

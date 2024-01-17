@@ -2,11 +2,11 @@
 import { Option, Button, Container, Divider, FormControl, FormGroup, FormLabel, Paper, Select, TextField, MenuItem, InputLabel, Grid, InputBase, Input, OutlinedInput, FormControlLabel, Checkbox, Snackbar, Alert } from '@mui/material'
 import React, { useState } from 'react'
 import { getAuth } from 'firebase/auth'
-import { CreateQuote } from '../../components/ServerForms'
-import NewAddressModal from '../../components/NewAddressModal'
+import { CreateQuote } from '@/components/ServerForms'
+import NewAddressModal from '@/components/NewAddressModal'
 import { getCustomerList, getShippingList, getContactList } from '@/firebase/getData'
 import { useEffect } from 'react'
-import CustomSnackbar from '@/app/components/CustomSnackbar'
+import CustomSnackbar from '@/components/CustomSnackbar'
 const equipmentTypes =[
     {
         value: '19scissor',
